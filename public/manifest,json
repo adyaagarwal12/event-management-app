@@ -1,0 +1,17 @@
+{
+    "name": "VIT Chennai Events",
+    "short_name": "VIT Events",
+    "description": "Campus event discovery and management portal for VIT Chennai",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#f5f7fb",
+    "theme_color": "#183b8c",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/vit-logo.jpg",
+            "sizes": "512x512",
+            "type": "image/jpeg"
+        }
+    ]
+}

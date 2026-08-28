@@ -1,471 +1,987 @@
-<!DOCTYPE html>
-<html lang="en">
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #183b8c;
+    --blue: #2563eb;
+    --blue-light: #eff6ff;
+    --background: #f5f7fb;
+    --white: #ffffff;
+    --text: #172033;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --danger: #dc2626;
+    --success: #16a34a;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.container {
+    width: 90%;
+    max-width: 1150px;
+    margin: auto;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: white;
+
+    border-top: 3px solid var(--primary);
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-content {
+    min-height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    border: none;
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    color: var(--primary);
+
+    text-align: left;
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+.nav-logo {
+    width: 50px;
+    height: 50px;
 
-    <title>VIT Chennai Events</title>
+    object-fit: contain;
+}
 
-    <link rel="stylesheet" href="style.css">
-</head>
+.brand-text {
+    display: flex;
+    flex-direction: column;
+}
 
-<body>
+.brand-text strong {
+    font-size: 19px;
+}
 
-    <!-- =========================
-         NAVBAR
-    ========================== -->
+.brand-text span {
+    color: var(--muted);
+    font-size: 12px;
+}
 
-    <nav class="navbar">
+.desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
 
-        <div class="container nav-content">
+.desktop-nav button {
+    border: none;
+    background: transparent;
 
-            <div class="brand">
-                <img
-                    src="vit-logo.jpg"
-                    alt="VIT Chennai Logo"
-                    class="nav-logo"
-                >
+    padding: 9px 13px;
 
-                <span>VIT Chennai Events</span>
-            </div>
+    border-radius: 7px;
 
-            <a href="#create-event" class="nav-button">
-                + Create Event
-            </a>
+    color: #374151;
 
-        </div>
+    font-size: 14px;
+}
 
-    </nav>
+.desktop-nav button:hover {
+    background: var(--blue-light);
+    color: var(--blue);
+}
 
+.desktop-nav .create-btn {
+    background: var(--blue);
+    color: white;
+    margin-left: 7px;
+}
 
-    <!-- =========================
-         HERO
-    ========================== -->
+.desktop-nav .create-btn:hover {
+    background: #1d4ed8;
+    color: white;
+}
 
-    <header class="hero">
 
-        <div class="container hero-content">
+/* =========================
+   APP SECTIONS
+========================= */
 
-            <div>
-                <p class="hero-small">
-                    VIT CHENNAI CAMPUS
-                </p>
+.app-section {
+    display: none;
+}
 
-                <h1>
-                    VIT Chennai Events
-                </h1>
+.app-section.active {
+    display: block;
+}
 
-                <p class="hero-description">
-                    Discover what's happening on campus,
-                    stay updated and never miss an event.
-                </p>
-            </div>
 
-        </div>
+/* =========================
+   HERO
+========================= */
 
-    </header>
+.hero {
+    background:
+        linear-gradient(
+            135deg,
+            #173b8c,
+            #2563eb
+        );
 
+    color: white;
 
-    <!-- =========================
-         SEARCH & FILTER
-    ========================== -->
+    padding: 75px 0;
+}
 
-    <section class="search-section">
+.hero-inner {
+    max-width: 1150px;
+}
 
-        <div class="container search-bar">
+.hero-badge {
+    font-size: 12px;
 
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search events..."
-            >
+    font-weight: bold;
 
-            <select id="categoryFilter">
+    letter-spacing: 2px;
 
-                <option value="all">
-                    All Categories
-                </option>
+    opacity: 0.85;
 
-                <option value="Technology">
-                    Technology
-                </option>
+    margin-bottom: 10px;
+}
 
-                <option value="Cultural">
-                    Cultural
-                </option>
+.hero h1 {
+    max-width: 760px;
 
-                <option value="Sports">
-                    Sports
-                </option>
+    font-size: 50px;
 
-                <option value="Workshop">
-                    Workshop
-                </option>
+    line-height: 1.12;
 
-                <option value="Conference">
-                    Conference
-                </option>
+    margin-bottom: 18px;
+}
 
-                <option value="Other">
-                    Other
-                </option>
+.hero p {
+    max-width: 680px;
 
-            </select>
+    font-size: 18px;
 
-        </div>
+    opacity: 0.92;
 
-    </section>
+    margin-bottom: 25px;
+}
 
+.hero-button {
+    border: none;
 
-    <!-- =========================
-         MAIN CONTENT
-    ========================== -->
+    background: white;
 
-    <main class="container">
+    color: var(--primary);
 
+    padding: 12px 20px;
 
-        <!-- =========================
-             HAPPENING TODAY
-        ========================== -->
+    border-radius: 8px;
 
-        <section class="event-section">
+    font-weight: bold;
 
-            <div class="section-heading">
+    font-size: 14px;
+}
 
-                <div>
-                    <span class="section-label today-label">
-                        ● LIVE TODAY
-                    </span>
 
-                    <h2>Happening Today</h2>
+/* =========================
+   SEARCH
+========================= */
 
-                    <p>
-                        Events taking place today
-                    </p>
-                </div>
+.search-area {
+    background: white;
 
-            </div>
+    border-bottom: 1px solid var(--border);
 
-            <div
-                id="todayContainer"
-                class="events-grid"
-            >
-            </div>
+    padding: 18px 0;
+}
 
-        </section>
+.search-layout {
+    display: grid;
 
+    grid-template-columns:
+        1fr 220px;
 
-        <!-- =========================
-             THIS WEEK
-        ========================== -->
+    gap: 12px;
+}
 
-        <section class="event-section">
+.search-box {
+    display: flex;
 
-            <div class="section-heading">
+    align-items: center;
 
-                <div>
-                    <span class="section-label">
-                        THIS WEEK
-                    </span>
+    gap: 10px;
 
-                    <h2>Events This Week</h2>
+    background: var(--background);
 
-                    <p>
-                        Events happening within the next 7 days
-                    </p>
-                </div>
+    border: 1px solid var(--border);
 
-            </div>
+    border-radius: 9px;
 
-            <div
-                id="weekContainer"
-                class="events-grid"
-            >
-            </div>
+    padding: 0 14px;
+}
 
-        </section>
+.search-box input {
+    width: 100%;
 
+    border: none;
 
-        <!-- =========================
-             UPCOMING
-        ========================== -->
+    background: transparent;
 
-        <section class="event-section">
+    outline: none;
 
-            <div class="section-heading">
+    padding: 13px 0;
 
-                <div>
-                    <span class="section-label">
-                        COMING SOON
-                    </span>
+    font-size: 15px;
+}
 
-                    <h2>Upcoming Events</h2>
+.search-layout select {
+    border: 1px solid var(--border);
 
-                    <p>
-                        Events happening after this week
-                    </p>
+    border-radius: 9px;
 
-                </div>
+    padding: 13px;
 
-            </div>
+    background: white;
 
-            <div
-                id="upcomingContainer"
-                class="events-grid"
-            >
-            </div>
+    outline: none;
 
-        </section>
+    font-size: 14px;
+}
 
 
-        <!-- =========================
-             PAST EVENTS
-        ========================== -->
+/* =========================
+   HOME
+========================= */
 
-        <section class="event-section">
+.home-content {
+    padding-top: 42px;
 
-            <div class="section-heading">
+    padding-bottom: 30px;
+}
 
-                <div>
-                    <span class="section-label past-label">
-                        COMPLETED
-                    </span>
+.event-section {
+    margin-bottom: 48px;
+}
 
-                    <h2>Past Events</h2>
+.section-heading {
+    margin-bottom: 20px;
+}
 
-                    <p>
-                        Events that have already taken place
-                    </p>
+.section-label {
+    display: block;
 
-                </div>
+    color: var(--blue);
 
-            </div>
+    font-size: 11px;
 
-            <div
-                id="pastContainer"
-                class="events-grid"
-            >
-            </div>
+    font-weight: bold;
 
-        </section>
+    letter-spacing: 1.6px;
 
+    margin-bottom: 4px;
+}
 
-        <!-- =========================
-             CREATE EVENT
-        ========================== -->
+.today-label {
+    color: var(--danger);
+}
 
-        <section
-            class="create-section"
-            id="create-event"
-        >
+.past-label {
+    color: var(--muted);
+}
 
-            <div class="section-heading">
+.section-heading h2,
+.page h2 {
+    font-size: 28px;
 
-                <div>
-                    <span class="section-label">
-                        ORGANIZER
-                    </span>
+    line-height: 1.2;
 
-                    <h2>Create a New Event</h2>
+    margin-bottom: 4px;
+}
 
-                    <p>
-                        Clubs and organizers can publish campus events here.
-                    </p>
-                </div>
+.section-heading p,
+.page-description {
+    color: var(--muted);
 
-            </div>
+    font-size: 14px;
+}
 
 
-            <form id="eventForm">
+/* =========================
+   EVENT GRID
+========================= */
 
-                <div class="form-row">
+.events-grid {
+    display: grid;
 
-                    <div class="form-group">
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
 
-                        <label for="title">
-                            Event Title
-                        </label>
+    gap: 18px;
+}
 
-                        <input
-                            type="text"
-                            id="title"
-                            placeholder="e.g. VIT Hackathon 2026"
-                            required
-                        >
 
-                    </div>
+/* =========================
+   EVENT CARD
+========================= */
 
+.event-card {
+    background: white;
 
-                    <div class="form-group">
+    border: 1px solid var(--border);
 
-                        <label for="category">
-                            Category
-                        </label>
+    border-radius: 13px;
 
-                        <select id="category" required>
+    padding: 21px;
 
-                            <option value="">
-                                Select category
-                            </option>
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
 
-                            <option value="Technology">
-                                Technology
-                            </option>
+.event-card:hover {
+    transform: translateY(-4px);
 
-                            <option value="Cultural">
-                                Cultural
-                            </option>
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.08);
+}
 
-                            <option value="Sports">
-                                Sports
-                            </option>
+.today-card {
+    border-left: 4px solid var(--danger);
+}
 
-                            <option value="Workshop">
-                                Workshop
-                            </option>
+.past-card {
+    opacity: 0.7;
+}
 
-                            <option value="Conference">
-                                Conference
-                            </option>
+.card-top {
+    margin-bottom: 12px;
+}
 
-                            <option value="Other">
-                                Other
-                            </option>
+.category-badge {
+    display: inline-block;
 
-                        </select>
+    background: var(--blue-light);
 
-                    </div>
+    color: var(--blue);
 
-                </div>
+    padding: 5px 9px;
 
+    border-radius: 20px;
 
-                <div class="form-group">
+    font-size: 10px;
 
-                    <label for="description">
-                        Description
-                    </label>
+    font-weight: bold;
+}
 
-                    <textarea
-                        id="description"
-                        placeholder="Describe the event..."
-                        required
-                    ></textarea>
+.today-badge {
+    background: #fef2f2;
+    color: var(--danger);
+}
 
-                </div>
+.past-badge {
+    background: #f3f4f6;
+    color: var(--muted);
+}
 
+.event-card h3 {
+    color: var(--primary);
 
-                <div class="form-row">
+    font-size: 20px;
 
-                    <div class="form-group">
+    line-height: 1.3;
 
-                        <label for="date">
-                            Date
-                        </label>
+    margin-bottom: 9px;
+}
 
-                        <input
-                            type="date"
-                            id="date"
-                            required
-                        >
+.event-description {
+    color: var(--muted);
 
-                    </div>
+    font-size: 13px;
 
+    margin-bottom: 15px;
 
-                    <div class="form-group">
+    display: -webkit-box;
 
-                        <label for="venue">
-                            Venue
-                        </label>
+    -webkit-line-clamp: 2;
 
-                        <input
-                            type="text"
-                            id="venue"
-                            placeholder="e.g. Main Auditorium"
-                            required
-                        >
+    -webkit-box-orient: vertical;
 
-                    </div>
+    overflow: hidden;
+}
 
-                </div>
+.event-detail {
+    color: #4b5563;
 
+    font-size: 13px;
 
-                <div class="form-row">
+    margin: 7px 0;
+}
 
-                    <div class="form-group">
+.event-actions {
+    display: flex;
 
-                        <label for="organizer">
-                            Organizer
-                        </label>
+    flex-wrap: wrap;
 
-                        <input
-                            type="text"
-                            id="organizer"
-                            placeholder="e.g. Google Developer Student Club"
-                            required
-                        >
+    gap: 7px;
 
-                    </div>
+    margin-top: 17px;
+}
 
+.event-actions button {
+    border: none;
 
-                    <div class="form-group">
+    color: white;
 
-                        <label for="maxParticipants">
-                            Maximum Participants
-                        </label>
+    border-radius: 7px;
 
-                        <input
-                            type="number"
-                            id="maxParticipants"
-                            min="1"
-                            placeholder="e.g. 100"
-                            required
-                        >
+    padding: 8px 11px;
 
-                    </div>
+    font-size: 12px;
 
-                </div>
+    font-weight: bold;
+}
 
+.view-btn {
+    background: var(--blue);
+}
 
-                <button
-                    type="submit"
-                    class="primary-btn"
-                >
-                    Publish Event
-                </button>
+.register-btn {
+    background: var(--primary);
+}
 
-            </form>
+.edit-btn {
+    background: var(--success);
+}
 
-        </section>
+.delete-btn {
+    background: var(--danger);
+}
 
-    </main>
+.view-btn:hover {
+    background: #1d4ed8;
+}
 
+.register-btn:hover {
+    background: #102b68;
+}
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
+.edit-btn:hover {
+    background: #15803d;
+}
 
-    <footer class="footer">
+.delete-btn:hover {
+    background: #b91c1c;
+}
 
-        <div class="container">
 
-            <h3>VIT Chennai Events</h3>
+/* =========================
+   EMPTY STATE
+========================= */
 
-            <p>
-                Campus event discovery and management portal
-            </p>
+.empty-message {
+    grid-column: 1 / -1;
 
-            <p class="copyright">
-                © 2026 VIT Chennai
-            </p>
+    background: white;
 
-        </div>
+    border: 2px dashed #d1d5db;
 
-    </footer>
+    border-radius: 13px;
 
+    padding: 40px;
 
-    <script src="script.js"></script>
+    text-align: center;
 
-</body>
+    color: var(--muted);
+}
 
-</html>
+.empty-message h3 {
+    color: var(--text);
+
+    margin: 9px 0;
+}
+
+.empty-icon {
+    font-size: 34px;
+
+    margin-bottom: 5px;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page {
+    padding-top: 45px;
+
+    padding-bottom: 55px;
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 16px;
+
+    margin: 30px 0;
+}
+
+.stat-card {
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    padding: 22px;
+}
+
+.stat-card span {
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+.stat-card strong {
+    display: block;
+
+    color: var(--primary);
+
+    font-size: 32px;
+
+    margin-top: 4px;
+}
+
+
+/* =========================
+   MANAGE
+========================= */
+
+.manage-box {
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    padding: 25px;
+}
+
+.manage-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.manage-header h3 {
+    font-size: 20px;
+}
+
+.manage-header p {
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.event-form {
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    padding: 30px;
+}
+
+.form-row {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    padding: 12px 14px;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--blue);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, 0.1);
+}
+
+.form-group textarea {
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+}
+
+.primary-btn,
+.secondary-btn {
+    border-radius: 8px;
+
+    padding: 11px 18px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+.primary-btn {
+    border: none;
+
+    background: var(--blue);
+
+    color: white;
+}
+
+.primary-btn:hover {
+    background: #1d4ed8;
+}
+
+.secondary-btn {
+    background: white;
+
+    color: var(--text);
+
+    border: 1px solid var(--border);
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 2000;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-card {
+    width: 100%;
+
+    max-width: 600px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: white;
+
+    border-radius: 15px;
+
+    padding: 30px;
+
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+
+    right: 14px;
+
+    top: 8px;
+
+    background: transparent;
+
+    border: none;
+
+    font-size: 30px;
+
+    color: var(--muted);
+}
+
+.modal-card h2 {
+    color: var(--primary);
+
+    margin: 15px 0;
+}
+
+
+/* =========================
+   BOTTOM NAVIGATION
+========================= */
+
+.bottom-nav {
+    display: none;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    background: #111827;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 32px 15px;
+
+    margin-top: 20px;
+}
+
+.footer p {
+    color: #9ca3af;
+
+    margin: 5px 0;
+
+    font-size: 13px;
+}
+
+.footer small {
+    color: #6b7280;
+
+    font-size: 11px;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 950px) {
+
+    .events-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    body {
+        padding-bottom: 70px;
+    }
+
+    .container {
+        width: 92%;
+    }
+
+    .desktop-nav {
+        display: none;
+    }
+
+    .hero {
+        padding: 50px 0;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .search-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .manage-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .event-form {
+        padding: 22px;
+    }
+
+    .event-actions button {
+        flex: 1;
+    }
+
+    .bottom-nav {
+        display: grid;
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        position: fixed;
+
+        left: 0;
+
+        right: 0;
+
+        bottom: 0;
+
+        height: 68px;
+
+        background: white;
+
+        border-top: 1px solid var(--border);
+
+        box-shadow:
+            0 -4px 15px
+            rgba(0, 0, 0, 0.08);
+
+        z-index: 1500;
+    }
+
+    .bottom-nav button {
+        border: none;
+
+        background: white;
+
+        color: var(--muted);
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 2px;
+    }
+
+    .bottom-nav button span {
+        font-size: 19px;
+    }
+
+    .bottom-nav button small {
+        font-size: 10px;
+    }
+}

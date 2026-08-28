@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta name="theme-color" content="#183b8c">
+
     <title>VIT Chennai Events</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
@@ -20,264 +24,510 @@
 
         <div class="container nav-content">
 
-            <div class="brand">
+            <button
+                class="brand"
+                onclick="showSection('home')"
+            >
+
                 <img
                     src="vit-logo.jpg"
                     alt="VIT Chennai Logo"
                     class="nav-logo"
                 >
 
-                <span>VIT Chennai Events</span>
-            </div>
+                <div class="brand-text">
 
-            <a href="#create-event" class="nav-button">
-                + Create Event
-            </a>
+                    <strong>VIT Chennai</strong>
+
+                    <span>Events</span>
+
+                </div>
+
+            </button>
+
+
+            <div class="desktop-nav">
+
+                <button
+                    onclick="showSection('home')"
+                >
+                    Home
+                </button>
+
+
+                <button
+                    onclick="showSection('my-events')"
+                >
+                    My Registrations
+                </button>
+
+
+                <button
+                    onclick="showSection('organizer')"
+                >
+                    Organizer
+                </button>
+
+
+                <button
+                    class="create-btn"
+                    onclick="showSection('create')"
+                >
+                    + Create Event
+                </button>
+
+            </div>
 
         </div>
 
     </nav>
 
 
+
     <!-- =========================
-         HERO
+         HOME
     ========================== -->
 
-    <header class="hero">
+    <section
+        id="home"
+        class="app-section active"
+    >
 
-        <div class="container hero-content">
+        <!-- HERO -->
 
-            <div>
-                <p class="hero-small">
+        <section class="hero">
+
+            <div class="container hero-inner">
+
+                <div class="hero-badge">
                     VIT CHENNAI CAMPUS
-                </p>
-
-                <h1>
-                    VIT Chennai Events
-                </h1>
-
-                <p class="hero-description">
-                    Discover what's happening on campus,
-                    stay updated and never miss an event.
-                </p>
-            </div>
-
-        </div>
-
-    </header>
-
-
-    <!-- =========================
-         SEARCH & FILTER
-    ========================== -->
-
-    <section class="search-section">
-
-        <div class="container search-bar">
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search events..."
-            >
-
-            <select id="categoryFilter">
-
-                <option value="all">
-                    All Categories
-                </option>
-
-                <option value="Technology">
-                    Technology
-                </option>
-
-                <option value="Cultural">
-                    Cultural
-                </option>
-
-                <option value="Sports">
-                    Sports
-                </option>
-
-                <option value="Workshop">
-                    Workshop
-                </option>
-
-                <option value="Conference">
-                    Conference
-                </option>
-
-                <option value="Other">
-                    Other
-                </option>
-
-            </select>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         MAIN CONTENT
-    ========================== -->
-
-    <main class="container">
-
-
-        <!-- =========================
-             HAPPENING TODAY
-        ========================== -->
-
-        <section class="event-section">
-
-            <div class="section-heading">
-
-                <div>
-                    <span class="section-label today-label">
-                        ● LIVE TODAY
-                    </span>
-
-                    <h2>Happening Today</h2>
-
-                    <p>
-                        Events taking place today
-                    </p>
                 </div>
 
-            </div>
 
-            <div
-                id="todayContainer"
-                class="events-grid"
-            >
+                <h1>
+                    Discover what's happening
+                    on campus.
+                </h1>
+
+
+                <p>
+                    Find fests, workshops, competitions,
+                    talks and student activities happening
+                    across VIT Chennai.
+                </p>
+
+
+                <button
+                    class="hero-button"
+                    onclick="document.getElementById('searchInput').focus()"
+                >
+                    Explore Events
+                </button>
+
             </div>
 
         </section>
 
 
-        <!-- =========================
-             THIS WEEK
-        ========================== -->
 
-        <section class="event-section">
+        <!-- SEARCH + FILTER -->
 
-            <div class="section-heading">
+        <section class="search-area">
 
-                <div>
+            <div class="container search-layout">
+
+                <div class="search-box">
+
+                    <span>🔍</span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search events, clubs or venues..."
+                    >
+
+                </div>
+
+
+                <select id="categoryFilter">
+
+                    <option value="all">
+                        All Categories
+                    </option>
+
+                    <option value="Technology">
+                        Technology
+                    </option>
+
+                    <option value="Cultural">
+                        Cultural
+                    </option>
+
+                    <option value="Sports">
+                        Sports
+                    </option>
+
+                    <option value="Workshop">
+                        Workshop
+                    </option>
+
+                    <option value="Conference">
+                        Conference
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- EVENT CONTENT -->
+
+        <main class="container home-content">
+
+
+            <!-- TODAY -->
+
+            <section class="event-section">
+
+                <div class="section-heading">
+
+                    <span class="section-label today-label">
+                        ● TODAY
+                    </span>
+
+                    <h2>
+                        Happening Today
+                    </h2>
+
+                    <p>
+                        Don't miss what's happening right now.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="todayContainer"
+                    class="events-grid"
+                ></div>
+
+            </section>
+
+
+
+            <!-- THIS WEEK -->
+
+            <section class="event-section">
+
+                <div class="section-heading">
+
                     <span class="section-label">
                         THIS WEEK
                     </span>
 
-                    <h2>Events This Week</h2>
+                    <h2>
+                        Events This Week
+                    </h2>
 
                     <p>
-                        Events happening within the next 7 days
+                        Events happening in the next seven days.
                     </p>
+
                 </div>
 
-            </div>
 
-            <div
-                id="weekContainer"
-                class="events-grid"
-            >
-            </div>
+                <div
+                    id="weekContainer"
+                    class="events-grid"
+                ></div>
 
-        </section>
+            </section>
 
 
-        <!-- =========================
-             UPCOMING
-        ========================== -->
 
-        <section class="event-section">
+            <!-- UPCOMING -->
 
-            <div class="section-heading">
+            <section class="event-section">
 
-                <div>
+                <div class="section-heading">
+
                     <span class="section-label">
                         COMING SOON
                     </span>
 
-                    <h2>Upcoming Events</h2>
+                    <h2>
+                        Upcoming Events
+                    </h2>
 
                     <p>
-                        Events happening after this week
+                        Plan ahead and explore what's coming next.
                     </p>
 
                 </div>
 
-            </div>
 
-            <div
-                id="upcomingContainer"
-                class="events-grid"
-            >
-            </div>
+                <div
+                    id="upcomingContainer"
+                    class="events-grid"
+                ></div>
 
-        </section>
+            </section>
 
 
-        <!-- =========================
-             PAST EVENTS
-        ========================== -->
 
-        <section class="event-section">
+            <!-- PAST -->
 
-            <div class="section-heading">
+            <section class="event-section">
 
-                <div>
+                <div class="section-heading">
+
                     <span class="section-label past-label">
                         COMPLETED
                     </span>
 
-                    <h2>Past Events</h2>
+                    <h2>
+                        Past Events
+                    </h2>
 
                     <p>
-                        Events that have already taken place
+                        Take a look at events that have already happened.
                     </p>
 
                 </div>
 
-            </div>
+
+                <div
+                    id="pastContainer"
+                    class="events-grid"
+                ></div>
+
+            </section>
+
+
+        </main>
+
+    </section>
+
+
+
+    <!-- =========================
+         MY REGISTRATIONS
+    ========================== -->
+
+    <section
+        id="my-events"
+        class="app-section"
+    >
+
+        <main class="container page">
+
+            <span class="section-label">
+                STUDENT
+            </span>
+
+
+            <h2>
+                My Registrations
+            </h2>
+
+
+            <p class="page-description">
+                Keep track of your registered campus events.
+            </p>
+
 
             <div
-                id="pastContainer"
+                id="myRegistrations"
                 class="events-grid"
             >
-            </div>
 
-        </section>
+                <div class="empty-message">
+
+                    <div class="empty-icon">
+                        🎟️
+                    </div>
 
 
-        <!-- =========================
-             CREATE EVENT
-        ========================== -->
+                    <h3>
+                        No registrations yet
+                    </h3>
 
-        <section
-            class="create-section"
-            id="create-event"
-        >
-
-            <div class="section-heading">
-
-                <div>
-                    <span class="section-label">
-                        ORGANIZER
-                    </span>
-
-                    <h2>Create a New Event</h2>
 
                     <p>
-                        Clubs and organizers can publish campus events here.
+                        Your registered events will appear here.
                     </p>
+
+
+                    <button
+                        class="primary-btn"
+                        onclick="showSection('home')"
+                    >
+                        Explore Events
+                    </button>
+
                 </div>
 
             </div>
 
+        </main>
 
-            <form id="eventForm">
+    </section>
+
+
+
+    <!-- =========================
+         ORGANIZER
+    ========================== -->
+
+    <section
+        id="organizer"
+        class="app-section"
+    >
+
+        <main class="container page">
+
+            <span class="section-label">
+                ORGANIZER
+            </span>
+
+
+            <h2>
+                Organizer Dashboard
+            </h2>
+
+
+            <p class="page-description">
+                Manage and monitor your campus events.
+            </p>
+
+
+
+            <div class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <span>
+                        Total Events
+                    </span>
+
+                    <strong id="totalEvents">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span>
+                        Upcoming
+                    </span>
+
+                    <strong id="upcomingCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span>
+                        Completed
+                    </span>
+
+                    <strong id="pastCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="manage-box">
+
+                <div class="manage-header">
+
+                    <div>
+
+                        <h3>
+                            Manage Events
+                        </h3>
+
+                        <p>
+                            Edit or remove published events.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="primary-btn"
+                        onclick="showSection('create')"
+                    >
+                        + New Event
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="organizerEvents"
+                    class="events-grid"
+                ></div>
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+
+    <!-- =========================
+         CREATE EVENT
+    ========================== -->
+
+    <section
+        id="create"
+        class="app-section"
+    >
+
+        <main class="container page">
+
+            <span class="section-label">
+                ORGANIZER
+            </span>
+
+
+            <h2>
+                Create Event
+            </h2>
+
+
+            <p class="page-description">
+                Publish a new event for the VIT Chennai community.
+            </p>
+
+
+            <form
+                id="eventForm"
+                class="event-form"
+            >
+
+
+                <!-- TITLE + CATEGORY -->
 
                 <div class="form-row">
 
@@ -290,6 +540,7 @@
                         <input
                             type="text"
                             id="title"
+                            name="title"
                             placeholder="e.g. VIT Hackathon 2026"
                             required
                         >
@@ -303,7 +554,11 @@
                             Category
                         </label>
 
-                        <select id="category" required>
+                        <select
+                            id="category"
+                            name="category"
+                            required
+                        >
 
                             <option value="">
                                 Select category
@@ -340,20 +595,28 @@
                 </div>
 
 
+
+                <!-- DESCRIPTION -->
+
                 <div class="form-group">
 
                     <label for="description">
                         Description
                     </label>
 
+
                     <textarea
                         id="description"
+                        name="description"
                         placeholder="Describe the event..."
                         required
                     ></textarea>
 
                 </div>
 
+
+
+                <!-- DATE + VENUE -->
 
                 <div class="form-row">
 
@@ -363,9 +626,11 @@
                             Date
                         </label>
 
+
                         <input
                             type="date"
                             id="date"
+                            name="date"
                             required
                         >
 
@@ -378,10 +643,12 @@
                             Venue
                         </label>
 
+
                         <input
                             type="text"
                             id="venue"
-                            placeholder="e.g. Main Auditorium"
+                            name="venue"
+                            placeholder="e.g. MG Auditorium"
                             required
                         >
 
@@ -389,6 +656,9 @@
 
                 </div>
 
+
+
+                <!-- ORGANIZER + CAPACITY -->
 
                 <div class="form-row">
 
@@ -398,10 +668,12 @@
                             Organizer
                         </label>
 
+
                         <input
                             type="text"
                             id="organizer"
-                            placeholder="e.g. Google Developer Student Club"
+                            name="organizer"
+                            placeholder="e.g. GDG VIT Chennai"
                             required
                         >
 
@@ -414,9 +686,11 @@
                             Maximum Participants
                         </label>
 
+
                         <input
                             type="number"
                             id="maxParticipants"
+                            name="maxParticipants"
                             min="1"
                             placeholder="e.g. 100"
                             required
@@ -427,18 +701,126 @@
                 </div>
 
 
-                <button
-                    type="submit"
-                    class="primary-btn"
-                >
-                    Publish Event
-                </button>
+
+                <!-- BUTTONS -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        onclick="showSection('home')"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Publish Event
+                    </button>
+
+                </div>
+
 
             </form>
 
-        </section>
+        </main>
 
-    </main>
+    </section>
+
+
+
+    <!-- =========================
+         EVENT DETAILS MODAL
+    ========================== -->
+
+    <div
+        id="eventModal"
+        class="modal"
+    >
+
+        <div class="modal-card">
+
+            <button
+                class="close-btn"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+
+            <div
+                id="modalContent"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         MOBILE NAVIGATION
+    ========================== -->
+
+    <nav class="bottom-nav">
+
+        <button onclick="showSection('home')">
+
+            <span>
+                ⌂
+            </span>
+
+            <small>
+                Home
+            </small>
+
+        </button>
+
+
+        <button onclick="showSection('home')">
+
+            <span>
+                🔎
+            </span>
+
+            <small>
+                Explore
+            </small>
+
+        </button>
+
+
+        <button onclick="showSection('my-events')">
+
+            <span>
+                🎟
+            </span>
+
+            <small>
+                My Events
+            </small>
+
+        </button>
+
+
+        <button onclick="showSection('organizer')">
+
+            <span>
+                ☰
+            </span>
+
+            <small>
+                Manage
+            </small>
+
+        </button>
+
+    </nav>
+
 
 
     <!-- =========================
@@ -449,19 +831,24 @@
 
         <div class="container">
 
-            <h3>VIT Chennai Events</h3>
+            <strong>
+                VIT Chennai Events
+            </strong>
+
 
             <p>
                 Campus event discovery and management portal
             </p>
 
-            <p class="copyright">
+
+            <small>
                 © 2026 VIT Chennai
-            </p>
+            </small>
 
         </div>
 
     </footer>
+
 
 
     <script src="script.js"></script>
