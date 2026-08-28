@@ -1,0 +1,462 @@
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    background: linear-gradient(
+        135deg,
+        #1e3a8a,
+        #2563eb
+    );
+
+    color: white;
+
+    padding: 40px 0;
+}
+
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+
+
+/* VIT LOGO */
+
+.vit-logo {
+    width: 130px;
+    height: 130px;
+
+    object-fit: contain;
+
+    /* No circle */
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+}
+
+
+/* HEADER TEXT */
+
+.header-text h1 {
+    font-size: 42px;
+    margin-bottom: 8px;
+}
+
+.header-text p {
+    font-size: 17px;
+    opacity: 0.95;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    padding-top: 35px;
+    padding-bottom: 35px;
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.create-section,
+.events-section {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 14px;
+
+    margin-bottom: 30px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-title {
+    margin-bottom: 25px;
+}
+
+.section-title h2 {
+    font-size: 27px;
+    margin-bottom: 5px;
+}
+
+.section-title p {
+    color: #6b7280;
+    font-size: 15px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+
+input,
+textarea,
+select {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-family: inherit;
+
+    background: white;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+
+/* TWO COLUMN FORM */
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+}
+
+
+/* =========================
+   CREATE BUTTON
+========================= */
+
+.primary-btn {
+    border: none;
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 13px 18px;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.primary-btn:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   EVENTS GRID
+========================= */
+
+.events-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+/* =========================
+   EVENT CARD
+========================= */
+
+.event-card {
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    padding: 22px;
+
+    transition: 0.2s;
+}
+
+.event-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+/* EVENT TITLE */
+
+.event-card h3 {
+    font-size: 22px;
+
+    margin-bottom: 14px;
+
+    color: #1e3a8a;
+}
+
+
+/* EVENT DETAILS */
+
+.event-card p {
+    margin: 7px 0;
+
+    color: #4b5563;
+
+    font-size: 14px;
+}
+
+.event-card strong {
+    color: #1f2937;
+}
+
+
+/* =========================
+   EVENT BUTTONS
+========================= */
+
+.event-actions {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+.edit-btn,
+.delete-btn {
+    border: none;
+
+    padding: 9px 16px;
+
+    border-radius: 7px;
+
+    color: white;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+/* EDIT */
+
+.edit-btn {
+    background: #16a34a;
+}
+
+.edit-btn:hover {
+    background: #15803d;
+}
+
+
+/* DELETE */
+
+.delete-btn {
+    background: #dc2626;
+}
+
+.delete-btn:hover {
+    background: #b91c1c;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.no-events {
+    text-align: center;
+
+    color: #6b7280;
+
+    padding: 30px;
+
+    border: 2px dashed #d1d5db;
+
+    border-radius: 10px;
+
+    grid-column: 1 / -1;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    text-align: center;
+
+    padding: 25px;
+
+    background: #111827;
+
+    color: #d1d5db;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   TABLET / MOBILE
+========================= */
+
+@media (max-width: 750px) {
+
+    .header {
+        padding: 35px 0;
+    }
+
+    .header-content {
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .vit-logo {
+        width: 110px;
+        height: 110px;
+    }
+
+    .header-text h1 {
+        font-size: 32px;
+    }
+
+    .header-text p {
+        font-size: 15px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .create-section,
+    .events-section {
+        padding: 22px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 450px) {
+
+    .container {
+        width: 94%;
+    }
+
+    .header-text h1 {
+        font-size: 27px;
+    }
+
+    .header-text p {
+        font-size: 14px;
+    }
+
+    .event-actions {
+        flex-direction: column;
+    }
+
+    .edit-btn,
+    .delete-btn {
+        width: 100%;
+    }
+}

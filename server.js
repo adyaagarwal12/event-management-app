@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-
+app.use(express.static("public"));
 const PORT = 5000;
 
 mongoose
