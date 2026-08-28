@@ -1,462 +1,471 @@
-/* =========================
-   RESET
-========================= */
+<!DOCTYPE html>
+<html lang="en">
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>VIT Chennai Events</title>
 
-/* =========================
-   BODY
-========================= */
+    <link rel="stylesheet" href="style.css">
+</head>
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f5f7fb;
-    color: #1f2937;
-    line-height: 1.6;
-}
+<body>
 
+    <!-- =========================
+         NAVBAR
+    ========================== -->
 
-/* =========================
-   CONTAINER
-========================= */
+    <nav class="navbar">
 
-.container {
-    width: 90%;
-    max-width: 1100px;
-    margin: auto;
-}
+        <div class="container nav-content">
 
+            <div class="brand">
+                <img
+                    src="vit-logo.jpg"
+                    alt="VIT Chennai Logo"
+                    class="nav-logo"
+                >
 
-/* =========================
-   HEADER
-========================= */
+                <span>VIT Chennai Events</span>
+            </div>
 
-.header {
-    background: linear-gradient(
-        135deg,
-        #1e3a8a,
-        #2563eb
-    );
+            <a href="#create-event" class="nav-button">
+                + Create Event
+            </a>
 
-    color: white;
+        </div>
 
-    padding: 40px 0;
-}
+    </nav>
 
 
-.header-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 25px;
-}
+    <!-- =========================
+         HERO
+    ========================== -->
 
+    <header class="hero">
 
-/* VIT LOGO */
+        <div class="container hero-content">
 
-.vit-logo {
-    width: 130px;
-    height: 130px;
+            <div>
+                <p class="hero-small">
+                    VIT CHENNAI CAMPUS
+                </p>
 
-    object-fit: contain;
+                <h1>
+                    VIT Chennai Events
+                </h1>
 
-    /* No circle */
-    background: transparent;
-    border-radius: 0;
-    padding: 0;
-    box-shadow: none;
-}
+                <p class="hero-description">
+                    Discover what's happening on campus,
+                    stay updated and never miss an event.
+                </p>
+            </div>
 
+        </div>
 
-/* HEADER TEXT */
+    </header>
 
-.header-text h1 {
-    font-size: 42px;
-    margin-bottom: 8px;
-}
 
-.header-text p {
-    font-size: 17px;
-    opacity: 0.95;
-}
+    <!-- =========================
+         SEARCH & FILTER
+    ========================== -->
 
+    <section class="search-section">
 
-/* =========================
-   MAIN
-========================= */
+        <div class="container search-bar">
 
-main {
-    padding-top: 35px;
-    padding-bottom: 35px;
-}
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search events..."
+            >
 
+            <select id="categoryFilter">
 
-/* =========================
-   SECTIONS
-========================= */
+                <option value="all">
+                    All Categories
+                </option>
 
-.create-section,
-.events-section {
-    background: white;
+                <option value="Technology">
+                    Technology
+                </option>
 
-    padding: 30px;
+                <option value="Cultural">
+                    Cultural
+                </option>
 
-    border-radius: 14px;
+                <option value="Sports">
+                    Sports
+                </option>
 
-    margin-bottom: 30px;
+                <option value="Workshop">
+                    Workshop
+                </option>
 
-    box-shadow:
-        0 5px 20px rgba(0, 0, 0, 0.07);
-}
+                <option value="Conference">
+                    Conference
+                </option>
 
+                <option value="Other">
+                    Other
+                </option>
 
-/* =========================
-   SECTION TITLE
-========================= */
+            </select>
 
-.section-title {
-    margin-bottom: 25px;
-}
+        </div>
 
-.section-title h2 {
-    font-size: 27px;
-    margin-bottom: 5px;
-}
+    </section>
 
-.section-title p {
-    color: #6b7280;
-    font-size: 15px;
-}
 
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
 
-/* =========================
-   FORM
-========================= */
+    <main class="container">
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-}
+        <!-- =========================
+             HAPPENING TODAY
+        ========================== -->
 
-.form-group label {
-    font-weight: bold;
-    font-size: 14px;
-}
+        <section class="event-section">
 
+            <div class="section-heading">
 
-input,
-textarea,
-select {
-    width: 100%;
+                <div>
+                    <span class="section-label today-label">
+                        ● LIVE TODAY
+                    </span>
 
-    padding: 12px 14px;
+                    <h2>Happening Today</h2>
 
-    border: 1px solid #d1d5db;
+                    <p>
+                        Events taking place today
+                    </p>
+                </div>
 
-    border-radius: 8px;
+            </div>
 
-    font-size: 15px;
+            <div
+                id="todayContainer"
+                class="events-grid"
+            >
+            </div>
 
-    font-family: inherit;
+        </section>
 
-    background: white;
 
-    outline: none;
+        <!-- =========================
+             THIS WEEK
+        ========================== -->
 
-    transition: 0.2s;
-}
+        <section class="event-section">
 
+            <div class="section-heading">
 
-input:focus,
-textarea:focus,
-select:focus {
-    border-color: #2563eb;
+                <div>
+                    <span class="section-label">
+                        THIS WEEK
+                    </span>
 
-    box-shadow:
-        0 0 0 3px rgba(37, 99, 235, 0.1);
-}
+                    <h2>Events This Week</h2>
 
+                    <p>
+                        Events happening within the next 7 days
+                    </p>
+                </div>
 
-textarea {
-    min-height: 110px;
-    resize: vertical;
-}
+            </div>
 
+            <div
+                id="weekContainer"
+                class="events-grid"
+            >
+            </div>
 
-/* TWO COLUMN FORM */
+        </section>
 
-.form-row {
-    display: grid;
 
-    grid-template-columns: 1fr 1fr;
+        <!-- =========================
+             UPCOMING
+        ========================== -->
 
-    gap: 18px;
-}
+        <section class="event-section">
 
+            <div class="section-heading">
 
-/* =========================
-   CREATE BUTTON
-========================= */
+                <div>
+                    <span class="section-label">
+                        COMING SOON
+                    </span>
 
-.primary-btn {
-    border: none;
+                    <h2>Upcoming Events</h2>
 
-    background: #2563eb;
+                    <p>
+                        Events happening after this week
+                    </p>
 
-    color: white;
+                </div>
 
-    padding: 13px 18px;
+            </div>
 
-    border-radius: 8px;
+            <div
+                id="upcomingContainer"
+                class="events-grid"
+            >
+            </div>
 
-    font-size: 16px;
+        </section>
 
-    font-weight: bold;
 
-    cursor: pointer;
+        <!-- =========================
+             PAST EVENTS
+        ========================== -->
 
-    transition: 0.2s;
-}
+        <section class="event-section">
 
-.primary-btn:hover {
-    background: #1d4ed8;
+            <div class="section-heading">
 
-    transform: translateY(-1px);
-}
+                <div>
+                    <span class="section-label past-label">
+                        COMPLETED
+                    </span>
 
+                    <h2>Past Events</h2>
 
-/* =========================
-   EVENTS GRID
-========================= */
+                    <p>
+                        Events that have already taken place
+                    </p>
 
-.events-grid {
-    display: grid;
+                </div>
 
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+            </div>
 
-    gap: 20px;
-}
+            <div
+                id="pastContainer"
+                class="events-grid"
+            >
+            </div>
 
+        </section>
 
-/* =========================
-   EVENT CARD
-========================= */
 
-.event-card {
-    background: #ffffff;
+        <!-- =========================
+             CREATE EVENT
+        ========================== -->
 
-    border: 1px solid #e5e7eb;
+        <section
+            class="create-section"
+            id="create-event"
+        >
 
-    border-radius: 12px;
+            <div class="section-heading">
 
-    padding: 22px;
+                <div>
+                    <span class="section-label">
+                        ORGANIZER
+                    </span>
 
-    transition: 0.2s;
-}
+                    <h2>Create a New Event</h2>
 
-.event-card:hover {
-    transform: translateY(-3px);
+                    <p>
+                        Clubs and organizers can publish campus events here.
+                    </p>
+                </div>
 
-    box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.08);
-}
+            </div>
 
 
-/* EVENT TITLE */
+            <form id="eventForm">
 
-.event-card h3 {
-    font-size: 22px;
+                <div class="form-row">
 
-    margin-bottom: 14px;
+                    <div class="form-group">
 
-    color: #1e3a8a;
-}
+                        <label for="title">
+                            Event Title
+                        </label>
 
+                        <input
+                            type="text"
+                            id="title"
+                            placeholder="e.g. VIT Hackathon 2026"
+                            required
+                        >
 
-/* EVENT DETAILS */
+                    </div>
 
-.event-card p {
-    margin: 7px 0;
 
-    color: #4b5563;
+                    <div class="form-group">
 
-    font-size: 14px;
-}
+                        <label for="category">
+                            Category
+                        </label>
 
-.event-card strong {
-    color: #1f2937;
-}
+                        <select id="category" required>
 
+                            <option value="">
+                                Select category
+                            </option>
 
-/* =========================
-   EVENT BUTTONS
-========================= */
+                            <option value="Technology">
+                                Technology
+                            </option>
 
-.event-actions {
-    display: flex;
+                            <option value="Cultural">
+                                Cultural
+                            </option>
 
-    gap: 10px;
+                            <option value="Sports">
+                                Sports
+                            </option>
 
-    margin-top: 18px;
-}
+                            <option value="Workshop">
+                                Workshop
+                            </option>
 
-.edit-btn,
-.delete-btn {
-    border: none;
+                            <option value="Conference">
+                                Conference
+                            </option>
 
-    padding: 9px 16px;
+                            <option value="Other">
+                                Other
+                            </option>
 
-    border-radius: 7px;
+                        </select>
 
-    color: white;
+                    </div>
 
-    font-size: 14px;
+                </div>
 
-    cursor: pointer;
 
-    transition: 0.2s;
-}
+                <div class="form-group">
 
+                    <label for="description">
+                        Description
+                    </label>
 
-/* EDIT */
+                    <textarea
+                        id="description"
+                        placeholder="Describe the event..."
+                        required
+                    ></textarea>
 
-.edit-btn {
-    background: #16a34a;
-}
+                </div>
 
-.edit-btn:hover {
-    background: #15803d;
-}
 
+                <div class="form-row">
 
-/* DELETE */
+                    <div class="form-group">
 
-.delete-btn {
-    background: #dc2626;
-}
+                        <label for="date">
+                            Date
+                        </label>
 
-.delete-btn:hover {
-    background: #b91c1c;
-}
+                        <input
+                            type="date"
+                            id="date"
+                            required
+                        >
 
+                    </div>
 
-/* =========================
-   EMPTY STATE
-========================= */
 
-.no-events {
-    text-align: center;
+                    <div class="form-group">
 
-    color: #6b7280;
+                        <label for="venue">
+                            Venue
+                        </label>
 
-    padding: 30px;
+                        <input
+                            type="text"
+                            id="venue"
+                            placeholder="e.g. Main Auditorium"
+                            required
+                        >
 
-    border: 2px dashed #d1d5db;
+                    </div>
 
-    border-radius: 10px;
+                </div>
 
-    grid-column: 1 / -1;
-}
 
+                <div class="form-row">
 
-/* =========================
-   FOOTER
-========================= */
+                    <div class="form-group">
 
-.footer {
-    text-align: center;
+                        <label for="organizer">
+                            Organizer
+                        </label>
 
-    padding: 25px;
+                        <input
+                            type="text"
+                            id="organizer"
+                            placeholder="e.g. Google Developer Student Club"
+                            required
+                        >
 
-    background: #111827;
+                    </div>
 
-    color: #d1d5db;
 
-    font-size: 14px;
-}
+                    <div class="form-group">
 
+                        <label for="maxParticipants">
+                            Maximum Participants
+                        </label>
 
-/* =========================
-   TABLET / MOBILE
-========================= */
+                        <input
+                            type="number"
+                            id="maxParticipants"
+                            min="1"
+                            placeholder="e.g. 100"
+                            required
+                        >
 
-@media (max-width: 750px) {
+                    </div>
 
-    .header {
-        padding: 35px 0;
-    }
+                </div>
 
-    .header-content {
-        flex-direction: column;
 
-        text-align: center;
-    }
+                <button
+                    type="submit"
+                    class="primary-btn"
+                >
+                    Publish Event
+                </button>
 
-    .vit-logo {
-        width: 110px;
-        height: 110px;
-    }
+            </form>
 
-    .header-text h1 {
-        font-size: 32px;
-    }
+        </section>
 
-    .header-text p {
-        font-size: 15px;
-    }
+    </main>
 
-    .form-row {
-        grid-template-columns: 1fr;
-    }
 
-    .events-grid {
-        grid-template-columns: 1fr;
-    }
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
-    .create-section,
-    .events-section {
-        padding: 22px;
-    }
-}
+    <footer class="footer">
 
+        <div class="container">
 
-/* =========================
-   SMALL MOBILE
-========================= */
+            <h3>VIT Chennai Events</h3>
 
-@media (max-width: 450px) {
+            <p>
+                Campus event discovery and management portal
+            </p>
 
-    .container {
-        width: 94%;
-    }
+            <p class="copyright">
+                © 2026 VIT Chennai
+            </p>
 
-    .header-text h1 {
-        font-size: 27px;
-    }
+        </div>
 
-    .header-text p {
-        font-size: 14px;
-    }
+    </footer>
 
-    .event-actions {
-        flex-direction: column;
-    }
 
-    .edit-btn,
-    .delete-btn {
-        width: 100%;
-    }
-}
+    <script src="script.js"></script>
+
+</body>
+
+</html>
