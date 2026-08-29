@@ -26,7 +26,8 @@ function showSection(sectionId) {
         });
 
 
-    const section = document.getElementById(sectionId);
+    const section =
+        document.getElementById(sectionId);
 
 
     if (section) {
@@ -55,7 +56,8 @@ async function loadEvents() {
 
     try {
 
-        const response = await fetch("/api/events");
+        const response =
+            await fetch("/api/events");
 
 
         if (!response.ok) {
@@ -63,7 +65,8 @@ async function loadEvents() {
         }
 
 
-        allEvents = await response.json();
+        allEvents =
+            await response.json();
 
 
         displayEvents();
@@ -74,7 +77,10 @@ async function loadEvents() {
 
     catch (error) {
 
-        console.error("Error loading events:", error);
+        console.error(
+            "Error loading events:",
+            error
+        );
 
         showLoadingError();
 
@@ -134,14 +140,6 @@ function formatDate(dateString) {
 
 function displayEvents() {
 
-    if (
-        !searchInput ||
-        !categoryFilter
-    ) {
-        return;
-    }
-
-
     const searchText =
         searchInput.value
             .trim()
@@ -197,8 +195,9 @@ function displayEvents() {
 
     const today = getToday();
 
+    const weekEnd =
+        new Date(today);
 
-    const weekEnd = new Date(today);
 
     weekEnd.setDate(
         today.getDate() + 7
@@ -266,28 +265,28 @@ function displayEvents() {
     );
 
 
-    renderEvents(
+    renderStudentEvents(
         todayEvents,
         todayContainer,
         "today"
     );
 
 
-    renderEvents(
+    renderStudentEvents(
         weekEvents,
         weekContainer,
         "week"
     );
 
 
-    renderEvents(
+    renderStudentEvents(
         upcomingEvents,
         upcomingContainer,
         "upcoming"
     );
 
 
-    renderEvents(
+    renderStudentEvents(
         pastEvents,
         pastContainer,
         "past"
@@ -307,10 +306,10 @@ function compareDates(a, b) {
 
 
 // ==========================================
-// EVENT CARDS
+// STUDENT EVENT CARDS
 // ==========================================
 
-function renderEvents(
+function renderStudentEvents(
     events,
     container,
     type
@@ -406,22 +405,26 @@ function renderEvents(
 
 
             <p class="event-detail">
-                📅 ${formatDate(event.date)}
+                <strong>📅</strong>
+                ${formatDate(event.date)}
             </p>
 
 
             <p class="event-detail">
-                📍 ${escapeHtml(event.venue)}
+                <strong>📍</strong>
+                ${escapeHtml(event.venue)}
             </p>
 
 
             <p class="event-detail">
-                👤 ${escapeHtml(event.organizer)}
+                <strong>👤</strong>
+                ${escapeHtml(event.organizer)}
             </p>
 
 
             <p class="event-detail">
-                🎫 Capacity: ${event.maxParticipants}
+                <strong>🎫 Capacity:</strong>
+                ${event.maxParticipants}
             </p>
 
 
@@ -433,6 +436,22 @@ function renderEvents(
                 >
                     View Details
                 </button>
+
+
+                ${
+                    type !== "past"
+                    ?
+                    `
+                    <button
+                        class="register-btn"
+                        onclick="registerForEvent('${event._id}')"
+                    >
+                        Register Now
+                    </button>
+                    `
+                    :
+                    ""
+                }
 
             </div>
 
@@ -459,11 +478,6 @@ function viewEvent(id) {
 
 
     if (!event) {
-        return;
-    }
-
-
-    if (!modalContent || !eventModal) {
         return;
     }
 
@@ -508,6 +522,17 @@ function viewEvent(id) {
             ${event.maxParticipants}
         </p>
 
+
+        <br>
+
+
+        <button
+            class="register-btn"
+            onclick="registerForEvent('${event._id}')"
+        >
+            Register Now
+        </button>
+
     `;
 
 
@@ -518,9 +543,7 @@ function viewEvent(id) {
 
 function closeModal() {
 
-    if (eventModal) {
-        eventModal.classList.remove("show");
-    }
+    eventModal.classList.remove("show");
 
 }
 
@@ -540,162 +563,11 @@ window.addEventListener(
 
 
 // ==========================================
-// CREATE EVENT
+// REGISTRATION BUTTON
+// TEMPORARY UI
 // ==========================================
 
-if (eventForm) {
-
-    eventForm.addEventListener(
-        "submit",
-        async event => {
-
-            event.preventDefault();
-
-
-            const formData =
-                new FormData(eventForm);
-
-
-            const eventData = {
-
-                title:
-                    String(
-                        formData.get("title") || ""
-                    ).trim(),
-
-                description:
-                    String(
-                        formData.get("description") || ""
-                    ).trim(),
-
-                date:
-                    String(
-                        formData.get("date") || ""
-                    ),
-
-                venue:
-                    String(
-                        formData.get("venue") || ""
-                    ).trim(),
-
-                organizer:
-                    String(
-                        formData.get("organizer") || ""
-                    ).trim(),
-
-                category:
-                    String(
-                        formData.get("category") || ""
-                    ),
-
-                maxParticipants:
-                    Number(
-                        formData.get(
-                            "maxParticipants"
-                        )
-                    )
-
-            };
-
-
-            if (
-                !eventData.title ||
-                !eventData.description ||
-                !eventData.date ||
-                !eventData.venue ||
-                !eventData.organizer ||
-                !eventData.category ||
-                !eventData.maxParticipants
-            ) {
-
-                alert(
-                    "Please fill in all fields."
-                );
-
-                return;
-
-            }
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        "/api/events",
-                        {
-
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body:
-                                JSON.stringify(
-                                    eventData
-                                )
-
-                        }
-                    );
-
-
-                const result =
-                    await response.json();
-
-
-                if (!response.ok) {
-
-                    alert(
-                        result.message ||
-                        "Unable to create event."
-                    );
-
-                    return;
-
-                }
-
-
-                alert(
-                    "Event created successfully!"
-                );
-
-
-                eventForm.reset();
-
-
-                await loadEvents();
-
-
-                showSection("home");
-
-            }
-
-            catch (error) {
-
-                console.error(
-                    "Create event error:",
-                    error
-                );
-
-
-                alert(
-                    "Unable to connect to the server."
-                );
-
-            }
-
-        }
-    );
-
-}
-
-
-// ==========================================
-// EDIT EVENT
-// ==========================================
-
-async function editEvent(id) {
+function registerForEvent(id) {
 
     const event =
         allEvents.find(
@@ -708,19 +580,313 @@ async function editEvent(id) {
     }
 
 
-    const newTitle =
+    alert(
+        `Registration for "${event.title}" will be connected to the registration system next.`
+    );
+
+}
+
+
+// ==========================================
+// CREATE EVENT
+// ==========================================
+
+eventForm.addEventListener(
+    "submit",
+    async event => {
+
+        event.preventDefault();
+
+
+        const formData =
+            new FormData(eventForm);
+
+
+        const eventData = {
+
+            title:
+                String(
+                    formData.get("title") || ""
+                ).trim(),
+
+            description:
+                String(
+                    formData.get("description") || ""
+                ).trim(),
+
+            date:
+                String(
+                    formData.get("date") || ""
+                ),
+
+            venue:
+                String(
+                    formData.get("venue") || ""
+                ).trim(),
+
+            organizer:
+                String(
+                    formData.get("organizer") || ""
+                ).trim(),
+
+            category:
+                String(
+                    formData.get("category") || ""
+                ),
+
+            maxParticipants:
+                Number(
+                    formData.get("maxParticipants")
+                )
+
+        };
+
+
+        if (
+            !eventData.title ||
+            !eventData.description ||
+            !eventData.date ||
+            !eventData.venue ||
+            !eventData.organizer ||
+            !eventData.category ||
+            !eventData.maxParticipants
+        ) {
+
+            alert(
+                "Please fill in all fields."
+            );
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/events",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(eventData)
+
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                alert(
+                    result.message ||
+                    "Unable to create event."
+                );
+
+                return;
+
+            }
+
+
+            alert(
+                "Event created successfully!"
+            );
+
+
+            eventForm.reset();
+
+
+            await loadEvents();
+
+
+            showSection("home");
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Create event error:",
+                error
+            );
+
+
+            alert(
+                "Unable to connect to the server."
+            );
+
+        }
+
+    }
+);
+
+
+// ==========================================
+// EDIT EVENT
+// ORGANIZER ONLY
+// ==========================================
+
+async function editEvent(id) {
+
+    const event =
+        allEvents.find(
+            item => item._id === id
+        );
+
+
+    if (!event) {
+
+        alert("Event not found.");
+
+        return;
+
+    }
+
+
+    const title =
         prompt(
-            "Enter new event title:",
+            "Event Title:",
             event.title
         );
 
 
     if (
-        newTitle === null ||
-        !newTitle.trim()
+        title === null ||
+        !title.trim()
     ) {
         return;
     }
+
+
+    const description =
+        prompt(
+            "Description:",
+            event.description
+        );
+
+
+    if (
+        description === null ||
+        !description.trim()
+    ) {
+        return;
+    }
+
+
+    const date =
+        prompt(
+            "Date (YYYY-MM-DD):",
+            event.date
+                ? new Date(event.date)
+                    .toISOString()
+                    .split("T")[0]
+                : ""
+        );
+
+
+    if (
+        date === null ||
+        !date.trim()
+    ) {
+        return;
+    }
+
+
+    const venue =
+        prompt(
+            "Venue:",
+            event.venue
+        );
+
+
+    if (
+        venue === null ||
+        !venue.trim()
+    ) {
+        return;
+    }
+
+
+    const organizer =
+        prompt(
+            "Organizer:",
+            event.organizer
+        );
+
+
+    if (
+        organizer === null ||
+        !organizer.trim()
+    ) {
+        return;
+    }
+
+
+    const category =
+        prompt(
+            "Category:",
+            event.category
+        );
+
+
+    if (
+        category === null ||
+        !category.trim()
+    ) {
+        return;
+    }
+
+
+    const maxParticipants =
+        prompt(
+            "Maximum Participants:",
+            event.maxParticipants
+        );
+
+
+    if (
+        maxParticipants === null ||
+        !maxParticipants.trim() ||
+        Number(maxParticipants) <= 0
+    ) {
+        return;
+    }
+
+
+    const updatedData = {
+
+        title:
+            title.trim(),
+
+        description:
+            description.trim(),
+
+        date:
+            date.trim(),
+
+        venue:
+            venue.trim(),
+
+        organizer:
+            organizer.trim(),
+
+        category:
+            category.trim(),
+
+        maxParticipants:
+            Number(maxParticipants)
+
+    };
 
 
     try {
@@ -738,10 +904,7 @@ async function editEvent(id) {
                     },
 
                     body:
-                        JSON.stringify({
-                            title:
-                                newTitle.trim()
-                        })
+                        JSON.stringify(updatedData)
 
                 }
             );
@@ -770,8 +933,6 @@ async function editEvent(id) {
 
         await loadEvents();
 
-        updateOrganizerDashboard();
-
     }
 
     catch (error) {
@@ -793,15 +954,10 @@ async function editEvent(id) {
 
 // ==========================================
 // DELETE EVENT
+// ORGANIZER ONLY
 // ==========================================
 
 async function deleteEvent(id) {
-
-    console.log(
-        "Deleting event:",
-        id
-    );
-
 
     const confirmed =
         confirm(
@@ -820,23 +976,13 @@ async function deleteEvent(id) {
             await fetch(
                 `/api/events/${id}`,
                 {
-                    method: "DELETE",
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    }
+                    method: "DELETE"
                 }
             );
 
 
         const result =
             await response.json();
-
-
-        console.log(
-            "Delete response:",
-            result
-        );
 
 
         if (!response.ok) {
@@ -857,9 +1003,6 @@ async function deleteEvent(id) {
 
 
         await loadEvents();
-
-
-        updateOrganizerDashboard();
 
     }
 
@@ -1044,28 +1187,20 @@ function updateOrganizerDashboard() {
 // SEARCH
 // ==========================================
 
-if (searchInput) {
-
-    searchInput.addEventListener(
-        "input",
-        displayEvents
-    );
-
-}
+searchInput.addEventListener(
+    "input",
+    displayEvents
+);
 
 
 // ==========================================
 // FILTER
 // ==========================================
 
-if (categoryFilter) {
-
-    categoryFilter.addEventListener(
-        "change",
-        displayEvents
-    );
-
-}
+categoryFilter.addEventListener(
+    "change",
+    displayEvents
+);
 
 
 // ==========================================
@@ -1122,7 +1257,7 @@ function showLoadingError() {
 
 
 // ==========================================
-// START APP
+// START
 // ==========================================
 
 loadEvents();
