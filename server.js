@@ -6,7 +6,13 @@ const eventRoutes = require("./routes/eventRoutes");
 dotenv.config();
 
 const app = express();
+const os = require("os");
 
+app.get("/instance", (req, res) => {
+    res.json({
+        instance: os.hostname()
+    });
+});
 // Middleware
 app.use(express.json());
 app.use(express.static("public"));
