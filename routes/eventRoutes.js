@@ -2,6 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Event = require("../models/event");
 
+const {
+  authenticateToken,
+  authorizeRoles
+} = require("../middleware/authMiddleware");
+
+
 // ==========================================
 // CREATE - Add a new event
 // POST /api/events
@@ -14,6 +20,7 @@ router.post("/", async (req, res) => {
       message: "Event created successfully!",
       event: event
     });
+
   } catch (error) {
     res.status(400).json({
       message: "Error creating event",
@@ -21,6 +28,7 @@ router.post("/", async (req, res) => {
     });
   }
 });
+
 
 // ==========================================
 // READ - Get all events
@@ -31,6 +39,7 @@ router.get("/", async (req, res) => {
     const events = await Event.find();
 
     res.status(200).json(events);
+
   } catch (error) {
     res.status(500).json({
       message: "Error fetching events",
@@ -38,6 +47,7 @@ router.get("/", async (req, res) => {
     });
   }
 });
+
 
 // ==========================================
 // READ - Get one event by ID
@@ -54,6 +64,7 @@ router.get("/:id", async (req, res) => {
     }
 
     res.status(200).json(event);
+
   } catch (error) {
     res.status(400).json({
       message: "Invalid event ID",
@@ -62,63 +73,80 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+
 // ==========================================
 // UPDATE - Update an event
 // PUT /api/events/:id
+// Requires authentication + organizer/admin role
 // ==========================================
-router.put("/:id", async (req, res) => {
-  try {
-    const updatedEvent = await Event.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      {
-        new: true,
-        runValidators: true
-      }
-    );
+router.put(
+  "/:id",
+  authenticateToken,
+  authorizeRoles("organizer", "admin"),
+  async (req, res) => {
+    try {
+      const updatedEvent = await Event.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {
+          new: true,
+          runValidators: true
+        }
+      );
 
-    if (!updatedEvent) {
-      return res.status(404).json({
-        message: "Event not found"
+      if (!updatedEvent) {
+        return res.status(404).json({
+          message: "Event not found"
+        });
+      }
+
+      res.status(200).json({
+        message: "Event updated successfully!",
+        event: updatedEvent
+      });
+
+    } catch (error) {
+      res.status(400).json({
+        message: "Error updating event",
+        error: error.message
       });
     }
-
-    res.status(200).json({
-      message: "Event updated successfully!",
-      event: updatedEvent
-    });
-  } catch (error) {
-    res.status(400).json({
-      message: "Error updating event",
-      error: error.message
-    });
   }
-});
+);
+
 
 // ==========================================
 // DELETE - Delete an event
 // DELETE /api/events/:id
+// Requires authentication + organizer/admin role
 // ==========================================
-router.delete("/:id", async (req, res) => {
-  try {
-    const deletedEvent = await Event.findByIdAndDelete(req.params.id);
+router.delete(
+  "/:id",
+  authenticateToken,
+  authorizeRoles("organizer", "admin"),
+  async (req, res) => {
+    try {
+      const deletedEvent = await Event.findByIdAndDelete(req.params.id);
 
-    if (!deletedEvent) {
-      return res.status(404).json({
-        message: "Event not found"
+      if (!deletedEvent) {
+        return res.status(404).json({
+          message: "Event not found"
+        });
+      }
+
+      res.status(200).json({
+        message: "Event deleted successfully!",
+        event: deletedEvent
+      });
+
+    } catch (error) {
+      res.status(400).json({
+        message: "Error deleting event",
+        error: error.message
       });
     }
-
-    res.status(200).json({
-      message: "Event deleted successfully!",
-      event: deletedEvent
-    });
-  } catch (error) {
-    res.status(400).json({
-      message: "Error deleting event",
-      error: error.message
-    });
   }
-});
+);
+
 
 module.exports = router;

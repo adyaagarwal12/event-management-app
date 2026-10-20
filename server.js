@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const eventRoutes = require("./routes/eventRoutes");
-
+const authRoutes = require("./routes/authRoutes");
 dotenv.config();
 
 const app = express();
@@ -19,7 +19,7 @@ app.use(express.static("public"));
 
 // Routes
 app.use("/api/events", eventRoutes);
-
+app.use("/api/auth", authRoutes);
 // Test route
 app.get("/", (req, res) => {
   res.send("Campus Event Management API is running!");
